@@ -1,0 +1,34 @@
+## The following variables must be provided as arguments : app.name, app.version
+
+app:
+  replicaCount: 1
+  dependencies:
+    kafka: false
+    redis: false
+    mongodb: false
+  ports:
+    api: 50051
+    management: 8080
+image:
+  registry: eu.gcr.io/equidis
+  pullPolicy: IfNotPresent
+service:
+  port: 50051
+  type: ClusterIP
+probes:
+  startup:
+    endPoint: /health/liveness
+    initialDelaySeconds: 5
+    timeoutSeconds: 2
+    periodSeconds: 5
+    failureThreshold: 10
+  readiness:
+    endPoint: /health/readiness
+    timeoutSeconds: 2
+    periodSeconds: 10
+    failureThreshold: 3
+  liveness:
+    endPoint: /health/liveness
+    timeoutSeconds: 2
+    periodSeconds: 10
+    failureThreshold: 3
