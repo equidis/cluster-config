@@ -1,0 +1,11 @@
+### Helm ###
+*.tgz
+.history
+*.lock
+
+### VS Code ###
+.vscode
+
+### IntelliJ IDEA ###
+.idea
+*.iml
