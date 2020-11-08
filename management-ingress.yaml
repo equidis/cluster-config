@@ -1,0 +1,67 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: management-gateway
+spec:
+  selector:
+    istio: ingressgateway
+  servers:
+    - port:
+        number: 80
+        name: http-management
+        protocol: http
+      hosts:
+        - grafana.equidis.tk
+        - prometheus.equidis.tk
+        - kiali.equidis.tk
+        - tracing.equidis.tk
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: management-vs
+spec:
+  hosts:
+    - grafana.equidis.tk
+    - prometheus.equidis.tk
+    - kiali.equidis.tk
+    - tracing.equidis.tk
+  gateways:
+    - management-gateway
+  http:
+    - match:
+        - headers:
+            host:
+              exact: grafana.equidis.tk
+      route:
+        - destination:
+            host: grafana.istio-system.svc.cluster.local
+            port:
+              number: 3000
+    - match:
+        - headers:
+            host:
+              exact: prometheus.equidis.tk
+      route:
+        - destination:
+            host: prometheus.istio-system.svc.cluster.local
+            port:
+              number: 9090
+    - match:
+        - headers:
+            host:
+              exact: kiali.equidis.tk
+      route:
+        - destination:
+            host: kiali.istio-system.svc.cluster.local
+            port:
+              number: 20001
+    - match:
+        - headers:
+            host:
+              exact: tracing.equidis.tk
+      route:
+        - destination:
+            host: tracing.istio-system.svc.cluster.local
+            port:
+              number: 80
