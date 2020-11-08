@@ -1,0 +1,55 @@
+apiVersion: "apps/v1"
+kind: Deployment
+metadata:
+  name: {{ .Values.app.name }}-deployment
+  labels:
+    app: {{ .Values.app.name }}
+spec:
+  replicas: {{ .Values.app.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Values.app.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.app.name }}
+    spec:
+      containers:
+        - name: business-application
+          image: "{{ .Values.image.registry }}/{{ .Values.image.name | default .Values.app.name }}:{{ .Values.app.version }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - name: grpc-api
+              containerPort: {{ .Values.app.ports.api }}
+            - name: http-management
+              containerPort: {{ .Values.app.ports.management }}
+          startupProbe:
+            httpGet:
+              path: {{ .Values.probes.startup.endPoint }}
+              port: http-management
+            initialDelaySeconds: {{ .Values.probes.startup.initialDelaySeconds }}
+            timeoutSeconds: {{ .Values.probes.startup.timeoutSeconds }}
+            periodSeconds: {{ .Values.probes.startup.periodSeconds }}
+            failureThreshold: {{ .Values.probes.startup.failureThreshold }}
+          readinessProbe:
+            httpGet:
+              path: {{ .Values.probes.readiness.endPoint }}
+              port: http-management
+            timeoutSeconds: {{ .Values.probes.readiness.timeoutSeconds }}
+            periodSeconds: {{ .Values.probes.readiness.periodSeconds }}
+            failureThreshold: {{ .Values.probes.readiness.failureThreshold }}
+          livenessProbe:
+            httpGet:
+              path: {{ .Values.probes.liveness.endPoint }}
+              port: http-management
+            timeoutSeconds: {{ .Values.probes.liveness.timeoutSeconds }}
+            periodSeconds: {{ .Values.probes.liveness.periodSeconds }}
+            failureThreshold: {{ .Values.probes.liveness.failureThreshold }}
+          envFrom:
+            - configMapRef:
+                name: environment-config
+          env:
+            - name: SERVER_PORT
+              value: {{ .Values.app.ports.api | quote }}
+            - name: MANAGEMENT_PORT
+              value: {{ .Values.app.ports.management | quote }}
