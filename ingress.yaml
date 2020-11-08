@@ -1,0 +1,43 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: grpc-gateway
+spec:
+  selector:
+    istio: ingressgateway
+  servers:
+    - port:
+        number: 9090
+        name: grpc
+        protocol: grpc
+      hosts:
+        - api.equidis.tk
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: grpc-vs
+spec:
+  hosts:
+    - api.equidis.tk
+  gateways:
+    - grpc-gateway
+  http:
+    - name: users
+      match:
+      - uri:
+          prefix: "/users.UsersService"
+      route:
+        - destination:
+            host: users.micronaut.svc.cluster.local
+            port:
+              number: 50051
+    - name: availability
+      match:
+      - uri:
+          prefix: "/availability.UsersAvailabilityService"
+      route:
+        - destination:
+            host: availability.micronaut.svc.cluster.local
+            port:
+              number: 50051
