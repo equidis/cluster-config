@@ -26,7 +26,7 @@ spec:
     - name: users
       match:
       - uri:
-          prefix: "/users.UsersService"
+          prefix: "/users"
       route:
         - destination:
             host: users.micronaut.svc.cluster.local
@@ -35,7 +35,7 @@ spec:
     - name: availability
       match:
       - uri:
-          prefix: "/availability.UsersAvailabilityService"
+          prefix: "/availability"
       route:
         - destination:
             host: availability.micronaut.svc.cluster.local
