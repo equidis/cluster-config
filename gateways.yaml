@@ -1,0 +1,33 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: grpc-gateway
+spec:
+  selector:
+    istio: ingressgateway
+  servers:
+    - port:
+        number: 9090
+        name: grpc
+        protocol: grpc
+      hosts:
+        - grpc.equidis.tk
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: http-gateway
+spec:
+  selector:
+    istio: ingressgateway
+  servers:
+    - port:
+        number: 80
+        name: http
+        protocol: http
+      hosts:
+        - api.equidis.tk
+        - grafana.equidis.tk
+        - prometheus.equidis.tk
+        - kiali.equidis.tk
+        - tracing.equidis.tk
