@@ -2,6 +2,7 @@
 
 app:
   replicaCount: 1
+  kind: grpc
   dependencies:
     kafka: false
     redis: false
