@@ -15,7 +15,7 @@ spec:
         app: {{ .Values.app.name }}
         kind: {{ .Values.app.kind }}
       annotations:
-        sidecar.istio.io/userVolume: '[{"name":"descriptor","configMap":{"name":"proto-descriptor","items":[{"key":"proto.pb","path":"proto.pb"}]}}]'
+        sidecar.istio.io/userVolume: '[{"name":"descriptor","configMap":{"name":"{{ .Values.app.name }}-proto-descriptor","items":[{"key":"proto.pb","path":"proto.pb"}]}}]'
         sidecar.istio.io/userVolumeMount: '[{"name":"descriptor","mountPath":"/etc/envoy"}]'
     spec:
       containers:
