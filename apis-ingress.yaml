@@ -14,8 +14,6 @@ spec:
       match:
         - uri:
             prefix: "/users"
-        - uri:
-            prefix: "/v1/users"
       route:
         - destination:
             host: users.micronaut.svc.cluster.local
