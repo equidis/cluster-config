@@ -1,0 +1,13 @@
+name: deploy
+on:
+  repository_dispatch:
+    types: [new-release]
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Download deployment descriptor
+        run: |
+          echo ${{ github.event.client_payload.downloadLink }}
