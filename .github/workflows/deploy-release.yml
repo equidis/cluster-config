@@ -1,0 +1,19 @@
+name: deploy
+on:
+  repository_dispatch:
+    types: [new-release]
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Download asset
+        uses: dsaltares/fetch-gh-release-asset@master
+        with:
+          repo: ${{ github.event.client_payload.repo }}
+          version: tags/${{ github.event.client_payload.tag }}
+          file: "deployment-metadata.zip"
+          token: ${{ secrets.GH_DISPATCH_TOKEN }}
+      - name: Unzip descriptor
+        run: unzip deployment-metadata.zip -d application
