@@ -22,7 +22,7 @@ spec:
     - name: availability
       match:
         - uri:
-            prefix: "/availability"
+            prefix: "/availabilities"
       route:
         - destination:
             host: availability.micronaut.svc.cluster.local
