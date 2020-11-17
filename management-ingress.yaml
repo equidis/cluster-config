@@ -9,7 +9,7 @@ spec:
     - kiali.equidis.tk
     - tracing.equidis.tk
   gateways:
-    - management-gateway
+    - http-gateway
   http:
     - match:
         - headers:
