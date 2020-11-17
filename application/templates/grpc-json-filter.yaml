@@ -20,7 +20,7 @@ spec:
           name: envoy.filters.http.grpc_json_transcoder
           typed_config:
             "@type": type.googleapis.com/envoy.extensions.filters.http.grpc_json_transcoder.v3.GrpcJsonTranscoder
-            proto_descriptor: /etc/envoy/{{ .Values.app.name }}/proto.pb
+            proto_descriptor: /etc/envoy/proto.pb
             services: {{ .Values.api.services }}
             print_options:
               add_whitespace: true
@@ -30,3 +30,4 @@ spec:
   workloadSelector:
     labels:
       kind: grpc
+      app: {{ .Values.app.name }}
