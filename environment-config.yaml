@@ -6,3 +6,5 @@ data:
   MONGO_PROTOCOL: "mongodb+srv"
   MONGO_HOST: "equidis.rbcdi.mongodb.net"
   MONGO_CREDENTIALS: "admin:uuW3HBniDU2zTlvX@"
+  REDIS_PROTOCOL: "redis"
+  REDIS_HOST: "10.211.236.123:6379"
