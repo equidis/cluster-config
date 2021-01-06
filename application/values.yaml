@@ -18,20 +18,3 @@ image:
 service:
   port: 50051
   type: ClusterIP
-probes:
-  startup:
-    endPoint: /health/liveness
-    initialDelaySeconds: 5
-    timeoutSeconds: 2
-    periodSeconds: 5
-    failureThreshold: 10
-  readiness:
-    endPoint: /health/readiness
-    timeoutSeconds: 2
-    periodSeconds: 10
-    failureThreshold: 3
-  liveness:
-    endPoint: /health/liveness
-    timeoutSeconds: 2
-    periodSeconds: 10
-    failureThreshold: 3
