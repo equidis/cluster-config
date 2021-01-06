@@ -16,7 +16,7 @@ spec:
             prefix: "/users"
       route:
         - destination:
-            host: users.micronaut.svc.cluster.local
+            host: users.apps.svc.cluster.local
             port:
               number: 50051
     - name: availability
@@ -25,6 +25,6 @@ spec:
             prefix: "/availabilities"
       route:
         - destination:
-            host: availability.micronaut.svc.cluster.local
+            host: availability.apps.svc.cluster.local
             port:
               number: 50051
