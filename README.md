@@ -82,6 +82,6 @@ helm install DEPLOYMENT_NAME ./equidis-application-0.0.0.tgz --set app.name=APP_
 | Variable        | Example           | Description                                |
 | --------------- |:-----------------:| ------------------------------------------:|
 | DEPLOYMENT_NAME | sb-users          | Helm chart name                            |
-| APP_NAME        | sb-users          | Application name                           |
+| APP_NAME        | users             | Application name                           |
 | IMAGE_NAME      | springboot-users  | Application image name (Docker image name) |
 | APP_VERSION     | 0.1.0             | Image version (Docker image version)       |
