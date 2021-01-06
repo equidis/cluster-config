@@ -14,9 +14,11 @@ spec:
       labels:
         app: {{ .Values.app.name }}
         kind: {{ .Values.app.kind }}
+      {{- if eq .Values.app.kind "grpc" -}}
       annotations:
         sidecar.istio.io/userVolume: '[{"name":"descriptor","configMap":{"name":"{{ .Values.app.name }}-proto-descriptor","items":[{"key":"proto.pb","path":"proto.pb"}]}}]'
         sidecar.istio.io/userVolumeMount: '[{"name":"descriptor","mountPath":"/etc/envoy"}]'
+      {{- end }}
     spec:
       containers:
         - name: business-application
