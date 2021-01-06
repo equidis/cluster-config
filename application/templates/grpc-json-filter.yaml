@@ -1,3 +1,4 @@
+{{- if eq .Values.app.kind "grpc" -}}
 apiVersion: networking.istio.io/v1alpha3
 kind: EnvoyFilter
 metadata:
@@ -31,3 +32,4 @@ spec:
     labels:
       kind: grpc
       app: {{ .Values.app.name }}
+{{- end }}

@@ -1,3 +1,4 @@
+{{- if eq .Values.app.kind "grpc" -}}
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -5,3 +6,4 @@ metadata:
 binaryData:
   proto.pb: |-
   {{ .Files.Get "proto.pb" | b64enc |  indent 4 }}
+{{- end -}}
