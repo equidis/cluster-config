@@ -4,7 +4,7 @@ metadata:
   name: {{ .Values.app.name }}
 spec:
   ports:
-    - name: grpc-backend
+    - name: {{ .Values.app.kind }}-backend
       port: {{ .Values.service.port }}
       targetPort: {{ .Values.app.ports.api }}
   type: ClusterIP
