@@ -25,32 +25,28 @@ spec:
           image: "{{ .Values.image.registry }}/{{ .Values.image.name | default .Values.app.name }}:{{ .Values.app.version }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
-            - name: grpc-api
+            - name: {{ .Values.app.kind }}-api
               containerPort: {{ .Values.app.ports.api }}
             - name: http-management
               containerPort: {{ .Values.app.ports.management }}
           startupProbe:
-            httpGet:
-              path: {{ .Values.probes.startup.endPoint }}
-              port: http-management
-            initialDelaySeconds: {{ .Values.probes.startup.initialDelaySeconds }}
-            timeoutSeconds: {{ .Values.probes.startup.timeoutSeconds }}
-            periodSeconds: {{ .Values.probes.startup.periodSeconds }}
-            failureThreshold: {{ .Values.probes.startup.failureThreshold }}
+            tcpSocket:
+              port: {{ .Values.app.ports.api }}
+            initialDelaySeconds: 2
+            periodSeconds: 1
+            failureThreshold: 60
+          livenessProbe:
+            tcpSocket:
+              port: {{ .Values.app.ports.api }}
+            periodSeconds: 5
+            failureThreshold: 3
           readinessProbe:
             httpGet:
-              path: {{ .Values.probes.readiness.endPoint }}
+              path: {{ if ne .Values.app.kind "grpc" }}/actuator{{end}}/health/readiness
               port: http-management
-            timeoutSeconds: {{ .Values.probes.readiness.timeoutSeconds }}
-            periodSeconds: {{ .Values.probes.readiness.periodSeconds }}
-            failureThreshold: {{ .Values.probes.readiness.failureThreshold }}
-          livenessProbe:
-            httpGet:
-              path: {{ .Values.probes.liveness.endPoint }}
-              port: http-management
-            timeoutSeconds: {{ .Values.probes.liveness.timeoutSeconds }}
-            periodSeconds: {{ .Values.probes.liveness.periodSeconds }}
-            failureThreshold: {{ .Values.probes.liveness.failureThreshold }}
+            timeoutSeconds: 5
+            periodSeconds: 10
+            failureThreshold: 3
           envFrom:
             - configMapRef:
                 name: environment-config
