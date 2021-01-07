@@ -15,10 +15,16 @@
 istioctl install -f istio-config.yaml
 ```
 
-###### Configure Istio
+###### Create namespace
 
 ```text
-istioctl install -f istio-config.yaml
+kubectl create namespace apps
+```
+
+###### Set apps namespace as default
+
+```text
+kubectl config set-context --current --namespace=apps
 ```
 
 ###### Declare Istio's gateways
@@ -40,18 +46,6 @@ kubectl apply -f api-ingress.yaml
 ```
 
 ## Setup namespace
-
-###### Create namespace
-
-```text
-kubectl create namespace apps
-```
-
-###### Set apps namespace as default
-
-```text
-kubectl config set-context --current --namespace=apps
-```
 
 ###### Create environment ConfigMap
 
