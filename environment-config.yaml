@@ -8,3 +8,6 @@ data:
   MONGO_CREDENTIALS: "admin:uuW3HBniDU2zTlvX@"
   REDIS_PROTOCOL: "redis"
   REDIS_HOST: "10.211.236.123:6379"
+  SERVER_PORT: "50051"
+  MANAGEMENT_PORT: "8080"
+  _JAVA_OPTIONS: "-Djdk.tls.client.protocols=TLSv1.2"
