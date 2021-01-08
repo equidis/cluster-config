@@ -17,3 +17,8 @@ jobs:
           token: ${{ secrets.GH_DISPATCH_TOKEN }}
       - name: Unzip descriptor
         run: unzip deployment-metadata.zip -d application
+      - name: Setup directories
+        run: |
+          mv ./proto.pb ./application/proto.pb
+          ls
+          ls ./application
