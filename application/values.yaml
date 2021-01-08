@@ -1,14 +1,7 @@
-## The following variables must be provided as arguments : app.name, app.version
-
 app:
   replicaCount: 1
   enabled:
     hpa: true
-  kind: grpc
-  dependencies:
-    kafka: false
-    redis: false
-    mongodb: false
   ports:
     api: 50051
     management: 8080
