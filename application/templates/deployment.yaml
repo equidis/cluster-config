@@ -14,11 +14,11 @@ spec:
       labels:
         app: {{ .Values.app.name }}
         kind: {{ .Values.app.kind }}
-      {{- if eq .Values.app.kind "grpc" -}}
+      {{ if eq .Values.app.kind "grpc" }}
       annotations:
         sidecar.istio.io/userVolume: '[{"name":"descriptor","configMap":{"name":"{{ .Values.app.name }}-proto-descriptor","items":[{"key":"proto.pb","path":"proto.pb"}]}}]'
         sidecar.istio.io/userVolumeMount: '[{"name":"descriptor","mountPath":"/etc/envoy"}]'
-      {{- end }}
+      {{ end }}
     spec:
       containers:
         - name: business-application
@@ -41,9 +41,14 @@ spec:
             periodSeconds: 5
             failureThreshold: 3
           readinessProbe:
+            {{ if eq .Values.app.kind "grpc" }}
+            exec:
+              command: ["/bin/grpc_health_probe", "-addr=:{{ .Values.app.ports.api }}"]
+            {{ else }}
             httpGet:
-              path: {{ if ne .Values.app.kind "grpc" }}/actuator{{end}}/health/readiness
+              path: /health/readiness
               port: http-management
+            {{ end }}
             timeoutSeconds: 5
             periodSeconds: 10
             failureThreshold: 3
