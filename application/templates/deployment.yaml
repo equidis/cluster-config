@@ -46,7 +46,7 @@ spec:
               command: ["/bin/grpc_health_probe", "-addr=:{{ .Values.app.ports.api }}"]
             {{ else }}
             httpGet:
-              path: /health/readiness
+              path: /actuator/health/readiness
               port: http-management
             {{ end }}
             timeoutSeconds: 5
