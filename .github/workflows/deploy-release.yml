@@ -24,3 +24,5 @@ jobs:
           ls
           echo "==============="
           ls application/
+      - name: Setup Helm
+        uses: azure/setup-helm@v1
