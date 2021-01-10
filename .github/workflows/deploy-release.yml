@@ -20,4 +20,6 @@ jobs:
       - name: Setup directories
         run: "[ ! -f ./proto.pb ] || mv -f ./proto.pb ./application/proto.pb"
       - name: Display directory tree
-        run: tree
+        run: |
+          ls
+          ls application/
