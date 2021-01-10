@@ -19,7 +19,8 @@ jobs:
         run: unzip deployment-metadata.zip -d application
       - name: Setup directories
         run: "[ ! -f ./proto.pb ] || mv -f ./proto.pb ./application/proto.pb"
-      - name: Display directory tree
+      - name: Display directory content
         run: |
           ls
+          echo "==============="
           ls application/
