@@ -1,0 +1,35 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: ServiceEntry
+metadata:
+  name: mongodb-atlas
+  namespace: istio-system
+spec:
+  hosts:
+    - equidis-shard-00-00.rbcdi.mongodb.net
+    - equidis-shard-00-01.rbcdi.mongodb.net
+    - equidis-shard-00-02.rbcdi.mongodb.net
+  location: MESH_EXTERNAL
+  ports:
+    - name: tls-mongo
+      number: 27017
+      protocol: MONGO
+  resolution: NONE
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: ServiceEntry
+metadata:
+  name: redis
+  namespace: istio-system
+spec:
+  hosts:
+    - gcloud.redis
+  addresses:
+    - 10.71.227.200/29
+  location: MESH_EXTERNAL
+  ports:
+    - name: tcp-redis
+      number: 6379
+      protocol: REDIS
+  resolution: STATIC
+  endpoints:
+    - address: 10.71.227.203
