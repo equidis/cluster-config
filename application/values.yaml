@@ -6,7 +6,7 @@ app:
     api: 50051
     management: 8080
 image:
-  registry: eu.gcr.io/equidis
+  registry: eu.gcr.io/gcloud-equidis
   pullPolicy: IfNotPresent
 service:
   port: 50051
