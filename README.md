@@ -62,7 +62,7 @@ kubectl apply -f limit-range.yaml
 ###### Enable Istio's automatic injection
 
 ```text
-kubectl label namespace default istio-injection=enabled
+kubectl label namespace apps istio-injection=enabled
 ```
 
 ## Application setup
