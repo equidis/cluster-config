@@ -47,6 +47,12 @@ kubectl apply -f apis-ingress.yaml
 
 ## Setup Istio components
 
+###### Configure Prometheus
+
+```text
+kubectl apply -f https://raw.githubusercontent.com/istio/istio/release-1.8/samples/addons/prometheus.yaml
+```
+
 ###### Configure Grafana
 
 ```text
