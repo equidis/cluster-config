@@ -42,7 +42,7 @@ kubectl apply -f management-ingress.yaml
 ###### Configure API ingress
 
 ```text
-kubectl apply -f api-ingress.yaml
+kubectl apply -f apis-ingress.yaml
 ```
 
 ## Setup namespace
