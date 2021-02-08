@@ -65,6 +65,12 @@ kubectl apply -f https://raw.githubusercontent.com/istio/istio/release-1.8/sampl
 kubectl apply -f https://raw.githubusercontent.com/istio/istio/release-1.8/samples/addons/jaeger.yaml
 ```
 
+###### Configure Kiali
+
+```text
+kubectl apply -f https://raw.githubusercontent.com/istio/istio/release-1.8/samples/addons/kiali.yaml
+```
+
 ## Setup namespace
 
 ###### Create environment ConfigMap
