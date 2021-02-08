@@ -45,6 +45,14 @@ kubectl apply -f management-ingress.yaml
 kubectl apply -f apis-ingress.yaml
 ```
 
+## Setup Istio components
+
+###### Configure Grafana
+
+```text
+kubectl apply -f https://raw.githubusercontent.com/istio/istio/release-1.8/samples/addons/grafana.yaml
+```
+
 ## Setup namespace
 
 ###### Create environment ConfigMap
