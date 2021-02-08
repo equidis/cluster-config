@@ -59,6 +59,12 @@ kubectl apply -f https://raw.githubusercontent.com/istio/istio/release-1.8/sampl
 kubectl apply -f https://raw.githubusercontent.com/istio/istio/release-1.8/samples/addons/grafana.yaml
 ```
 
+###### Configure Jaeger
+
+```text
+kubectl apply -f https://raw.githubusercontent.com/istio/istio/release-1.8/samples/addons/jaeger.yaml
+```
+
 ## Setup namespace
 
 ###### Create environment ConfigMap
